@@ -1,7 +1,14 @@
 #  Тестовая база знаний
 
 #  Главная страница
-
+```mermaid
+gantt
+    title Проект X
+    dateFormat  YYYY-MM-DD
+    section Разработка
+    Дизайн       :active, des1, 2023-10-01, 7d
+    Код          :crit, 2023-10-08, 14d
+```
 ```mermaid
 flowchart TD
     A[Открыта] --> B{поступил ли аппарат?}
