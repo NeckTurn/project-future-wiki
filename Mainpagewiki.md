@@ -22,6 +22,31 @@ flowchart LR
     D -->|Отмена| G[Отменена]
     B -.->|Если нет данных| H[Отложена] --> B
 ```
+```mermaid
+---
+config:
+  theme: redux
+  layout: elk
+---
+flowchart TD
+    A(["Открыта <br>"]) --> B(["Отложена"])
+    B --> C["В работе<br>"]
+    C --> n1["Отложена (ожидает ответ клиента) <br>"]
+    n1 --> n3["Согласие"] & n4["Отказ от ремонта<br>"]
+    n3 --> n8["Выполнена"]
+    n4 --> n8
+    n8 --> n9["Передан на склад<br>"]
+    n9 --> n10["Выдано"]
+     B:::Class_01
+     n9:::Ash
+    classDef Ash stroke-width:1px, stroke-dasharray:none, stroke:#999999, fill:#EEEEEE, color:#000000
+    classDef Class_01 stroke-width:2px, stroke-dasharray: 2, fill:#BBDEFB
+    style C fill:#FFE0B2
+    style n3 fill:#2962FF
+    style n4 fill:#FFCDD2
+    style n8 fill:#FFF9C4
+    style n10 fill:#00C853
+```
 
 ## 📅 Пример
 - [x] Обновить документацию  
