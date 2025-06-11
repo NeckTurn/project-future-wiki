@@ -67,7 +67,7 @@ _Здесь хранятся все важные рабочие инструкц
 - [Корпоративный портал](https://portal.company.com)
 - [Google Диск с шаблонами](https://drive.google.com/...)
 - [Календарь встреч](https://calendar.google.com/...)
-
+![testtest](https://stankolab.ru/wp-content/uploads/2025/03/DSC_7407-копия.jpg)
 ---
 
 Последнее обновление: 11.06.2024_
