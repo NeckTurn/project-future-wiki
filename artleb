@@ -1,0 +1,57 @@
+<form>
+	<!-- Необходим reset, если нет шаблона. -->
+	<div class="fields" data-xp="name: 'person', repeat: {reset: true}">
+		<input name="first_name" placeholder="Имя" value="Сидор"/>
+		<input name="last_name" placeholder="Фамилия" value="Иванов"/>
+
+		<p class="fields" data-xp="name: 'contact', repeat: {reset: true}">
+			<input name="contact" value="si@mail.some"/>
+			<select name="contact_type">
+				<option>телефон</option>
+				<option selected="true">эл. почта</option>
+			</select>
+
+			<button class="repeat_append_button">+</button>
+			<button class="repeat_remove_button">&minus;</button>
+		</p>
+
+		<p class="fields" data-xp="name: 'contact', repeat: {reset: true}">
+			<input name="contact" value="ivanov@mail.some"/>
+			<select name="contact_type">
+				<option>телефон</option>
+				<option selected="true">эл. почта</option>
+			</select>
+
+			<button class="repeat_append_button">+</button>
+			<button class="repeat_remove_button">&minus;</button>
+		</p>
+
+		<p>
+			<button class="repeat_append_button">Добавить контактное лицо</button>
+			<button class="repeat_remove_button">Удалить</button>
+		</p>
+	</div>
+
+	<div class="fields" data-xp="name: 'person', repeat: {reset: true}">
+		<input name="first_name" placeholder="Имя" value="Иван"/>
+		<input name="last_name" placeholder="Фамилия" value="Сидоров"/>
+
+		<!-- Вложенным повторениям необходимо задать суффиксы. -->
+		<p class="fields" data-xp="name: 'contact[1]', repeat: {reset: true}">
+			<input name="contact[1][0]" value="is@mail.some"/>
+			<select name="contact_type[1][0]">
+				<option>телефон</option>
+				<option selected="true">эл. почта</option>
+			</select>
+
+			<button class="repeat_append_button">+</button>
+			<button class="repeat_remove_button">&minus;</button>
+		</p>
+
+		<p>
+			<button class="repeat_append_button">Добавить контактное лицо</button>
+			<button class="repeat_remove_button">Удалить</button>
+		</p>
+	</div>
+</form>
+ 
