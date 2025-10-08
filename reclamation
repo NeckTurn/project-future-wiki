@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запрос документов по рекламации</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2a5298;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        h2 {
+            color: #1e3c72;
+            margin: 25px 0 15px;
+            font-size: 22px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .document-list {
+            list-style-type: none;
+            margin: 20px 0;
+        }
+        
+        .document-list li {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            border-left: 3px solid #2a5298;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .document-list li i {
+            margin-right: 10px;
+            color: #2a5298;
+            font-weight: bold;
+            margin-top: 2px;
+        }
+        
+        .document-details {
+            flex: 1;
+        }
+        
+        .document-details h3 {
+            color: #1e3c72;
+            margin-bottom: 8px;
+        }
+        
+        .requirement {
+            display: flex;
+            margin: 15px 0;
+            padding: 15px;
+            background: #fff9e6;
+            border-radius: 5px;
+            border-left: 3px solid #ffc107;
+        }
+        
+        .requirement-icon {
+            margin-right: 15px;
+            color: #ff9800;
+            font-size: 20px;
+        }
+        
+        .requirement-content h3 {
+            color: #e65100;
+            margin-bottom: 5px;
+        }
+        
+        .email-section {
+            background: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .email-address {
+            display: inline-block;
+            background: #2a5298;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .steps {
+            margin: 20px 0;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background: #2a5298;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #2a5298;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #1e3c72;
+        }
+        
+        .btn-email {
+            background: #4CAF50;
+            padding: 15px 30px;
+            font-size: 18px;
+        }
+        
+        .btn-email:hover {
+            background: #388E3C;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #f1f1f1;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #eaeaea;
+        }
+        
+        @media (max-width: 600px) {
+            .content {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .requirement {
+                flex-direction: column;
+            }
+            
+            .requirement-icon {
+                margin-bottom: 10px;
+            }
+            
+            .step {
+                flex-direction: column;
+            }
+            
+            .step-number {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Запрос документов по рекламации</h1>
+            <p class="subtitle">Для запуска обращения в работу необходимо предоставить следующие документы</p>
+        </header>
+        
+        <div class="content">
+            <div class="info-box">
+                <p>Уважаемый клиент, для рассмотрения вашей рекламации и запуска обращения в работу, пожалуйста, подготовьте и отправьте указанные ниже документы по электронной почте.</p>
+            </div>
+            
+            <h2>Необходимые документы</h2>
+            
+            <ul class="document-list">
+                <li>
+                    <i>📄</i>
+                    <div class="document-details">
+                        <h3>Акт рекламации</h3>
+                        <p>Заполненный и подписанный акт рекламации в формате PDF или Word. Убедитесь, что все поля заполнены корректно.</p>
+                    </div>
+                </li>
+                <li>
+                    <i>📷</i>
+                    <div class="document-details">
+                        <h3>Фотографии изделия</h3>
+                        <p>Четкие фотографии изделия с разных ракурсов. На одной из фотографий должен быть хорошо виден серийный номер.</p>
+                    </div>
+                </li>
+                <li>
+                    <i>🔍</i>
+                    <div class="document-details">
+                        <h3>Фотографии дефекта/поломки</h3>
+                        <p>Детальные фотографии, на которых четко виден дефект или поломка изделия. Сделайте снимки с разных углов и при хорошем освещении.</p>
+                    </div>
+                </li>
+            </ul>
+            
+            <div class="requirement">
+                <div class="requirement-icon">⚠</div>
+                <div class="requirement-content">
+                    <h3>Важное требование к фотографиям</h3>
+                    <p>На одной из фотографий изделия должен быть четко виден серийный номер. Без этого идентификатора рассмотрение рекламации невозможно. Убедитесь, что номер читается без увеличения.</p>
+                </div>
+            </div>
+            
+            <div class="email-section">
+                <h2>Отправка документов</h2>
+                <p>Пожалуйста, отправьте все указанные выше документы по электронной почте на адрес:</p>
+                <div class="email-address">claim@metizltd.ru</div>
+                
+                <div class="steps">
+                    <h3>Инструкция по отправке:</h3>
+                    
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <p><strong>Подготовьте все документы</strong> - убедитесь, что у вас есть акт рекламации и все необходимые фотографии</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <p><strong>Создайте новое письмо</strong> в вашей почтовой программе (Outlook, Gmail, Яндекс.Почта и т.д.)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <p><strong>Укажите адрес получателя</strong>: <strong>claim@metizltd.ru</strong></p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <p><strong>Заполните тему письма</strong>: "Рекламация [номер вашей рекламации]"</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <p><strong>Прикрепите все документы</strong> к письму (акт рекламации и фотографии)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <p><strong>Напишите краткое сообщение</strong> с описанием проблемы и вашими контактными данными</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">7</div>
+                        <div class="step-content">
+                            <p><strong>Отправьте письмо</strong> и ожидайте подтверждения получения в течение 1-2 рабочих дней</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="mailto:claim@metizltd.ru?subject=Рекламация&body=Здравствуйте!%0D%0A%0D%0AНаправляю документы по рекламации.%0D%0A%0D%0AКонтактные данные:%0D%0A- ФИО:%0D%0A- Телефон:%0D%0A- Электронная почта:%0D%0A%0D%0AОписание проблемы:%0D%0A" class="btn btn-email">Создать письмо</a>
+            </div>
+            
+            <div class="info-box">
+                <h3>Что происходит после отправки?</h3>
+                <p>После получения ваших документов мы:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Проверим комплектность документов</li>
+                    <li>Зарегистрируем обращение в нашей системе</li>
+                    <li>Назначим ответственного специалиста</li>
+                    <li>Свяжемся с вами для уточнения деталей (при необходимости)</li>
+                    <li>Предоставим информацию о дальнейших шагах</li>
+                </ul>
+            </div>
+        </div>
+        
+        <footer>
+            <p>По вопросам заполнения документов обращайтесь на адрес эл. почты claim@metizltd.ru | +7 (495) 215-53-82</p>
+            <p style="margin-top: 10px;">Время обработки запросов: 1-2 рабочих дня</p>
+        </footer>
+    </div>
+</body>
+</html>
