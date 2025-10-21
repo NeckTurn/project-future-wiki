@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор акта рекламации</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background: #f0f2f5;
+            padding: 15px;
+            line-height: 1.5;
+        }
+        
+        .container {
+            max-width: 100%;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .form-section {
+            padding: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            -webkit-appearance: none;
+        }
+        
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin: 5px 0;
+        }
+        
+        .btn-copy {
+            background: #27ae60;
+        }
+        
+        .btn-new {
+            background: #e67e22;
+        }
+        
+        .result {
+            display: none;
+            padding: 15px;
+            background: #f8f9fa;
+            margin-top: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .result-text {
+            white-space: pre-line;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+        
+        .error {
+            border-color: #e74c3c !important;
+        }
+        
+        .success {
+            color: #27ae60;
+            text-align: center;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Генератор акта рекламации</h1>
+            <p>Заполните форму для создания акта</p>
+        </div>
+        
+        <div class="form-section">
+            <form id="claimForm">
+                <div class="form-group">
+                    <label for="claimNumber">Номер рекламации *</label>
+                    <input type="text" id="claimNumber" required placeholder="Введите номер">
+                </div>
+                
+                <div class="form-group">
+                    <label for="claimDate">Дата рекламации *</label>
+                    <input type="date" id="claimDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="productName">Наименование изделия *</label>
+                    <input type="text" id="productName" required placeholder="Наименование изделия">
+                </div>
+                
+                <div class="form-group">
+                    <label for="serialNumber">Серийный номер *</label>
+                    <input type="text" id="serialNumber" required placeholder="Серийный номер">
+                </div>
+                
+                <div class="form-group">
+                    <label for="patientName">ФИО пациента *</label>
+                    <input type="text" id="patientName" required placeholder="ФИО пациента">
+                </div>
+                
+                <div class="form-group">
+                    <label for="birthDate">Дата рождения *</label>
+                    <input type="date" id="birthDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="age">Возраст (лет) *</label>
+                    <input type="number" id="age" required placeholder="Возраст">
+                </div>
+                
+                <div class="form-group">
+                    <label for="weight">Вес (кг) *</label>
+                    <input type="number" id="weight" required placeholder="Вес">
+                </div>
+                
+                <div class="form-group">
+                    <label for="height">Рост (см) *</label>
+                    <input type="number" id="height" required placeholder="Рост">
+                </div>
+                
+                <div class="form-group">
+                    <label for="activityLevel">Уровень активности по MOBIS *</label>
+                    <input type="text" id="activityLevel" required placeholder="Уровень активности">
+                </div>
+                
+                <div class="form-group">
+                    <label for="diagnosis">Диагноз и ПОИ *</label>
+                    <textarea id="diagnosis" required placeholder="Диагноз и ПОИ"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="usageStart">Дата начала эксплуатации *</label>
+                    <input type="date" id="usageStart" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="malfunction">Характер поломки *</label>
+                    <textarea id="malfunction" required placeholder="Описание поломки"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="invoiceNumber">Номер накладной *</label>
+                    <input type="text" id="invoiceNumber" required placeholder="Номер накладной">
+                </div>
+                
+                <div class="form-group">
+                    <label for="invoiceDate">Дата накладной *</label>
+                    <input type="date" id="invoiceDate" required>
+                </div>
+                
+                <button type="button" class="btn" onclick="generateClaim()">✅ Сгенерировать акт</button>
+            </form>
+            
+            <div class="result" id="result">
+                <h3>📄 Сгенерированный акт рекламации:</h3>
+                <div class="result-text" id="resultText"></div>
+                <button class="btn btn-copy" onclick="copyToClipboard()">📋 Копировать в буфер</button>
+                <button class="btn btn-new" onclick="newClaim()">🔄 Новый акт</button>
+                <div id="copyStatus" class="success" style="display:none;">✅ Текст скопирован!</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Устанавливаем текущую дату по умолчанию
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('claimDate').value = today;
+        });
+        
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}.${month}.${year}`;
+        }
+        
+        function generateClaim() {
+            // Сбрасываем статус копирования
+            document.getElementById('copyStatus').style.display = 'none';
+            
+            // Проверяем обязательные поля
+            const requiredFields = [
+                'claimNumber', 'claimDate', 'productName', 'serialNumber',
+                'patientName', 'birthDate', 'age', 'weight', 'height',
+                'activityLevel', 'diagnosis', 'usageStart', 'malfunction',
+                'invoiceNumber', 'invoiceDate'
+            ];
+            
+            let isValid = true;
+            requiredFields.forEach(field => {
+                const element = document.getElementById(field);
+                if (!element.value.trim()) {
+                    element.classList.add('error');
+                    isValid = false;
+                } else {
+                    element.classList.remove('error');
+                }
+            });
+            
+            if (!isValid) {
+                alert('❌ Пожалуйста, заполните все обязательные поля!');
+                return;
+            }
+            
+            // Формируем текст акта
+            const claimText = `Рекламационный акт ${document.getElementById('claimNumber').value}
+от ${formatDate(document.getElementById('claimDate').value)}.
+
+Направляем Вам на рассмотрение изделие: ${document.getElementById('productName').value} с серийным номером SN ${document.getElementById('serialNumber').value}, для:
+выяснения причины поломки, ремонта или замены изделия (рекламации);
+
+Пациент (обязательно к заполнению):
+
+ФИО: ${document.getElementById('patientName').value}
+Год рождения: ${formatDate(document.getElementById('birthDate').value)}
+Возраст: ${document.getElementById('age').value} лет.
+Вес: ${document.getElementById('weight').value} кг.
+Рост: ${document.getElementById('height').value} см.
+Уровень активности по MOBIS: ${document.getElementById('activityLevel').value}
+Диагноз пациента и наименование ПОИ, в котором использовалось рассматриваемое изделие: ${document.getElementById('diagnosis').value}
+
+Изделие (обязательно к заполнению):
+
+Сроки эксплуатации рассматриваемого изделия: с ${formatDate(document.getElementById('usageStart').value)}
+Характер поломки, неисправности рассматриваемого изделия: ${document.getElementById('malfunction').value}
+Номер и дата расходной накладной/ УПД, по которой покупалось рассматриваемое изделие: ${document.getElementById('invoiceNumber').value} от ${formatDate(document.getElementById('invoiceDate').value)}.`;
+            
+            // Показываем результат
+            document.getElementById('resultText').textContent = claimText;
+            document.getElementById('result').style.display = 'block';
+            
+            // Прокручиваем к результату
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function copyToClipboard() {
+            const text = document.getElementById('resultText').textContent;
+            
+            // Пробуем современный API
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showCopySuccess();
+                }).catch(() => {
+                    fallbackCopyText(text);
+                });
+            } else {
+                fallbackCopyText(text);
+            }
+        }
+        
+        function fallbackCopyText(text) {
+            // Старый метод для совместимости
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showCopySuccess();
+            } catch (err) {
+                alert('❌ Не удалось скопировать текст. Скопируйте вручную.');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+        
+        function showCopySuccess() {
+            document.getElementById('copyStatus').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('copyStatus').style.display = 'none';
+            }, 3000);
+        }
+        
+        function newClaim() {
+            // Очищаем форму
+            document.getElementById('claimForm').reset();
+            
+            // Устанавливаем текущую дату
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('claimDate').value = today;
+            
+            // Сбрасываем стили ошибок
+            document.querySelectorAll('.error').forEach(el => {
+                el.classList.remove('error');
+            });
+            
+            // Скрываем результат
+            document.getElementById('result').style.display = 'none';
+            
+            // Прокручиваем к началу
+            window.scrollTo(0, 0);
+        }
+        
+        // Убираем класс ошибки при вводе
+        document.querySelectorAll('input, textarea').forEach(element => {
+            element.addEventListener('input', function() {
+                this.classList.remove('error');
+            });
+        });
+    </script>
+</body>
+</html>
